@@ -31,8 +31,8 @@ Now we modify the PM(p,3) matrix where the range of gray scale values range from
 So listing down all the variables and matrix till now:
 I(x,y,3),PM(p,3),APM(a,2),p,a,mts
 
-
-
+The basic idea is explained above. When we look into intricaties while going further, we see we need to define a scenario based on the frame.p gets decided by this scenario. # fs simillary fsp is frame scenario position
+PM(p,3) is divided into PM(p,2) and PMV(p,1)
 
 
 

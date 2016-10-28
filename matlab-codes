@@ -1,0 +1,40 @@
+cd Art_project;
+
+iname=Protrait;
+I=imread('Portrait.jpg');
+GI=mean(I,3);
+Global x,y;[y,x]=size(GI);
+cd scripts/v1;
+
+global a=200;fs=10;fsp=0;
+create_PM_and_APM;
+create_TPM;                  # no need to create TPM if fs and a are unchanged
+
+mts=1;
+for pi=1:p
+PMV(pi,1)=f_update_grayscale(GI(PM(pi,2)-.5,PM(pi,1)-.5));
+end
+
+for pi
+for ni1,ni2
+TPI(ni1,ni2)=inv(PMV)*TPM(:,ni1,ni2)   #Thread presence indicator
+TL(ni1,ni2)=sum(:,ni1,ni2);   # Thread Length
+ths=1;th=1;    #threshold scenario, threshold sub scenario
+create_TP;   # Thread presence
+
+for pi
+for ni1,ni2
+SPMV(pi)=sum(TPM(pi,ni1,ni2)*TP(ni1,ni2));
+
+smts=max(SPMV);
+
+SGI=127*ones(size(GI));
+SGI(PM(pi,1),PM(pi,2))=f_unupdate_grayscale(SPMV(pi));
+
+cd ..;
+cd ..;
+
+imwrite(GI(:,:,1),iname,'jpg');
+siname=sprintf('%s_n_%1_t_%i.jpg',iname,int8(fsp),int8(ths),int8(th*100));
+imwrite(SGI(:,:,1),siname,'jpg');
+
